@@ -30,4 +30,5 @@ class TestModel(unittest.TestCase):
         self.assertIn(predictions[0], [0, 1])
 
 if __name__ == '__main__':
+    
     unittest.main()
