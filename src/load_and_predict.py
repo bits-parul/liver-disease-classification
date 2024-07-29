@@ -20,6 +20,8 @@ if __name__ == "__main__":
 
     # Make predictions
     predictions = predict(model, new_data)
-    decoded_predictions = ["Yes" if pred == 1 else "No" for pred in predictions]
+    decoded_predictions = [
+        "yes" if pred == 1 else "no" for pred in predictions
+        ]
     print("Predictions:", decoded_predictions)
     
