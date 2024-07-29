@@ -29,7 +29,7 @@ class TestModel(unittest.TestCase):
         self.assertEqual(len(predictions), 1)
         self.assertIn(predictions[0], [0, 1])
 
+
 if __name__ == '__main__':
-    
     
     unittest.main()
