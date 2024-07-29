@@ -3,18 +3,15 @@ from model_util import load_model, predict
 import pandas as pd
 
 
-class TestModel(unittest.TestCase):
+class TestModel(unittest.TestCase):    
     
-    
-    def test_model_loading(self):
-        
+    def test_model_loading(self):        
         
         model = load_model('models/liver_disease_randomforest_model.joblib')
         self.assertIsNotNone(model)
 
     def test_model_prediction(self):
-        
-        
+                
         model = load_model('models/liver_disease_randomforest_model.joblib')
         new_data = pd.DataFrame({
             'Age': [74.000000],
