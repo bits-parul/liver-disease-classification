@@ -4,7 +4,7 @@ from model_util import load_model, predict
 
 if __name__ == "__main__":
     model = load_model("models/liver_disease_randomforest_model.joblib")
-    
+
     # Example new data for prediction
     new_data = pd.DataFrame({
         'Age': [74.000000],
@@ -24,4 +24,3 @@ if __name__ == "__main__":
         "yes" if pred == 1 else "no" for pred in predictions
         ]
     print("Predictions:", decoded_predictions)
-    
