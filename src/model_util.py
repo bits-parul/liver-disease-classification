@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def load_model(model_path):
-    return jiblib.load_model(model_path)
+    return joblib.load(model_path)
     
     
 def predict(model, data):
