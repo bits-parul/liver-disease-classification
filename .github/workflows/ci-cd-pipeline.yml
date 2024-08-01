@@ -62,7 +62,7 @@ jobs:
 
       - name: SSH into EC2 and run deploy script
         run: |
-          ssh -o StrictHostKeyChecking=no -i /home/ec2-user/liver-server-key.pem ec2-user@16.171.44.242 << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ec2-user@16.171.44.242 << 'EOF'
           chmod +x /home/ec2-user/deploy.sh
           /home/ec2-user/deploy.sh
           EOF
