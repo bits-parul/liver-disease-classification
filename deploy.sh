@@ -2,7 +2,7 @@
 
 # Variables
 REMOTE_USER="ec2-user"
-REMOTE_HOST="13.60.59.177"
+REMOTE_HOST="16.171.44.242"
 REMOTE_PATH="/home/ec2-user"
 MODEL_PATH="/home/ec2-user/model-deployment/models"
 APP_PATH="/home/ec2-user/model-deployment/app"
