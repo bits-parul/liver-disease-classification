@@ -9,6 +9,7 @@ model = joblib.load('models/liver_disease_randomforest_model.joblib')
 
 @app.route('/predict', methods=['POST'])
 def predict():
+
     try:
         # Get the data from the POST request
         data = request.get_json(force=True)
@@ -44,10 +45,12 @@ def predict():
         return jsonify({
             'error': str(e)
         })
-        
+
 @app.route('/')
 def home():
+
     return 'Welcome to the Liver disease classification API!'
 
 if __name__ == '__main__':
+
     app.run(debug=True, host='0.0.0.0', port=5000)
