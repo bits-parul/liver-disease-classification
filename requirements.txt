@@ -5,3 +5,6 @@ scipy
 numpy
 pytest
 joblib
+flask
+jsonify
+requests
