@@ -57,11 +57,11 @@ jobs:
 
       - name: Copy deploy script to EC2
         run: |
-          scp -o StrictHostKeyChecking=no deploy.sh ec2-user@13.60.59.177:/home/ec2-user/
+          scp -o StrictHostKeyChecking=no deploy.sh ec2-user@16.171.44.242:/home/ec2-user/
 
       - name: SSH into EC2 and run deploy script
         run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@13.60.59.177 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ec2-user@16.171.44.242 << 'EOF'
           chmod +x /home/ec2-user/deploy.sh
           /home/ec2-user/deploy.sh
           EOF
