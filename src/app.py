@@ -8,6 +8,7 @@ app = Flask(__name__)
 model = joblib.load('models/liver_disease_randomforest_model.joblib')
 
 @app.route('/predict', methods=['POST'])
+
 def predict():
 
     try:
