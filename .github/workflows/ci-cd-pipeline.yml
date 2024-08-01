@@ -54,6 +54,7 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+          known-hosts: ${{ secrets.KNOWN_HOSTS }}
 
       - name: Copy deploy script to EC2
         run: |
