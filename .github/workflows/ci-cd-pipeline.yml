@@ -58,7 +58,7 @@ jobs:
 
       - name: Setup known hosts
         run: |
-          ssh-keyscan -H your-ec2-public-ip >> ~/.ssh/known_hosts
+          ssh-keyscan -H 16.171.44.242 >> ~/.ssh/known_hosts
 
       - name: Deploy to EC2
         run: |
