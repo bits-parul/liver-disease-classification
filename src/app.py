@@ -7,8 +7,8 @@ app = Flask(__name__)
 # Load the trained model
 model = joblib.load('models/liver_disease_randomforest_model.joblib')
 
-@app.route('/predict', methods=['POST'])
 
+@app.route('/predict', methods=['POST'])
 def predict():
 
     try:
@@ -47,8 +47,8 @@ def predict():
             'error': str(e)
         })
 
-@app.route('/')
 
+@app.route('/')
 def home():
 
     return 'Welcome to the Liver disease classification API!'
