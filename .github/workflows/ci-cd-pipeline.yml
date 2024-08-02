@@ -60,7 +60,15 @@ jobs:
         with:
           key: ${{ secrets.EC2_SSH_KEY }}
           known-hosts: |
-            16.171.44.242 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOil7FVhpiaD2dq3u2m5DYugzUeEdyv2REp8tZI2LGh5
+           16.171.44.242 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOil7FVhpiaD2dq3u2m5DYugzUeEdyv2REp8tZI2LGh5
+            
+      - name: Add EC2 instance to known_hosts
+        run: |
+          echo "16.171.44.242 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOil7FVhpiaD2dq3u2m5DYugzUeEdyv2REp8tZI2LGh5" >> ~/.ssh/known_hosts
+          echo "Host key added to known_hosts:"
+          cat ~/.ssh/known_hosts
+          echo "SSH directory contents:"
+          ls -la ~/.ssh
           
       - name: Deploy to EC2
         run: |
