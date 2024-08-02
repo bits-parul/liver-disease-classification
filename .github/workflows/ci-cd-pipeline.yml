@@ -57,7 +57,12 @@ jobs:
           
       - name: Add EC2 instance to known_hosts
         run: |
-          echo "16.171.44.242 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOil7FVhpiaD2dq3u2m5DYugzUeEdyv2REp8tZI2LGh5" >> ~/.ssh/known_hosts
+          ssh-keyscan -H 16.171.44.242 >> ~/.ssh/known_hosts
+          
+      - name: Debug SSH
+        run: |
+          cat ~/.ssh/known_hosts
+          ls -la ~/.ssh
 
       - name: Deploy to EC2
         run: |
