@@ -59,7 +59,7 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.EC2_SSH_KEY }}
-          known-hosts: |
+          known_hosts: |
            16.171.44.242 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOil7FVhpiaD2dq3u2m5DYugzUeEdyv2REp8tZI2LGh5
             
       - name: Add EC2 instance to known_hosts
