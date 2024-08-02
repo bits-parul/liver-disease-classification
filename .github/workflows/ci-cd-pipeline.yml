@@ -55,21 +55,13 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
           
-      - name: Setup SSH
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.EC2_SSH_KEY }}
-          known_hosts: |
-           16.171.44.242 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOil7FVhpiaD2dq3u2m5DYugzUeEdyv2REp8tZI2LGh5
-            
-      - name: Add EC2 instance to known_hosts
+      - name: Set up SSH
         run: |
-          echo "16.171.44.242 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOil7FVhpiaD2dq3u2m5DYugzUeEdyv2REp8tZI2LGh5" >> ~/.ssh/known_hosts
-          echo "Host key added to known_hosts:"
-          cat ~/.ssh/known_hosts
-          echo "SSH directory contents:"
-          ls -la ~/.ssh
-          
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 16.171.44.242 >> ~/.ssh/known_hosts
+            
       - name: Deploy to EC2
         run: |
           ssh -o StrictHostKeyChecking=no -t ec2-user@16.171.44.242 << 'EOF'
@@ -77,3 +69,6 @@ jobs:
             chmod +x deploy.sh
             ./deploy.sh
           EOF
+          
+        env:
+        EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
