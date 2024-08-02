@@ -55,11 +55,12 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
           
-      - name: Add EC2 instance to known_hosts
-        run: |
-          ssh-keyscan -H 16.171.44.242 >> ~/.ssh/known_hosts
-          cat ~/.ssh/known_hosts
-          ls -la ~/.ssh
+      - name: Setup SSH
+        uses: shimataro/ssh-key-action@v2
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+          known-hosts: |
+            16.171.44.242 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOil7FVhpiaD2dq3u2m5DYugzUeEdyv2REp8tZI2LGh5
           
       - name: Deploy to EC2
         run: |
