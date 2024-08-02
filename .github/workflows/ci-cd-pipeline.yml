@@ -50,19 +50,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-
-      - name: Setup known hosts
-        run: |
-          ssh-keyscan -H 16.171.44.242 >> ~/.ssh/known_hosts
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
       - name: Deploy to EC2
+        env:
+          KEY_FILE: ${{ secrets.EC2_SSH_KEY }}  
         run: |
-          ssh -o StrictHostKeyChecking=no -i /home/ec2-user/liver-server-key.pem ec2-user@16.171.44.242 << 'EOF'
+          echo "$KEY_FILE" > key.pem
+          chmod 600 key.pem
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@16.171.44.242 << 'EOF'
           cd /home/ec2-user/
           chmod +x deploy.sh
           ./deploy.sh
