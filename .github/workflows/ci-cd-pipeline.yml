@@ -54,14 +54,14 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+          
+      - name: Add EC2 instance to known_hosts
+        run: |
+          echo "16.171.44.242 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOil7FVhpiaD2dq3u2m5DYugzUeEdyv2REp8tZI2LGh5" >> ~/.ssh/known_hosts
 
       - name: Deploy to EC2
-        env:
-          KEY_FILE: ${{ secrets.EC2_SSH_KEY }}  
         run: |
-          echo "$KEY_FILE" > key.pem
-          chmod 600 key.pem
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@16.171.44.242 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ec2-user@16.171.44.242 << 'EOF'
           cd /home/ec2-user/
           chmod +x deploy.sh
           ./deploy.sh
