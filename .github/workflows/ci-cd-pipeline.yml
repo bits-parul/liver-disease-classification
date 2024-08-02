@@ -58,16 +58,13 @@ jobs:
       - name: Add EC2 instance to known_hosts
         run: |
           ssh-keyscan -H 16.171.44.242 >> ~/.ssh/known_hosts
-          
-      - name: Debug SSH
-        run: |
           cat ~/.ssh/known_hosts
           ls -la ~/.ssh
-
+          
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@16.171.44.242 << 'EOF'
-          cd /home/ec2-user/
-          chmod +x deploy.sh
-          ./deploy.sh
+          ssh -o StrictHostKeyChecking=no -t ec2-user@16.171.44.242 << 'EOF'
+            cd /home/ec2-user/
+            chmod +x deploy.sh
+            ./deploy.sh
           EOF
