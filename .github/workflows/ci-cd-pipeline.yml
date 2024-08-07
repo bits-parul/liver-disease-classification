@@ -62,16 +62,16 @@ jobs:
         run: |
           echo "${{ secrets.AWS_PRIVATE_KEY }}" > key.pem
           chmod 400 key.pem
-          scp -o StrictHostKeyChecking=no -i key.pem -r * ec2-user@16.171.142.83:/home/ec2-user/liver-app
+          scp -o StrictHostKeyChecking=no -i key.pem -r * ec2-user@16.170.233.176:/home/ec2-user/liver-app
 
       - name: SSH and Deploy
         if: success()
         env:
           KEY: ${{ secrets.AWS_PRIVATE_KEY }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@16.171.142.83 << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@16.170.233.176 << 'EOF'
           cd /home/ec2-user/liver-app
-          source venv/bin/activate
           pip install -r requirements.txt
-          nohup python /home/ec2-user/liver-app/app/liver_app.py &
+          nohup python /home/ec2-user/liver-app/app/liver_app.py > app.log 2>&1 &
+          exit
           EOF
