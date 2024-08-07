@@ -1,10 +1,6 @@
-pandas
-scikit-learn
-flake8
-scipy
-numpy
-pytest
-joblib
 flask
+scikit-learn
+pandas
+joblib
+request
 jsonify
-requests
