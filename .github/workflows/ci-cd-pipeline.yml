@@ -70,5 +70,5 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@13.51.166.88 << 'EOF'
           cd /home/ec2-user/liver-app
           pip install -r requirements.txt
-          nohup python3 ./app/liver-app.py &
+          nohup python3 app/liver-app.py &
           EOF
