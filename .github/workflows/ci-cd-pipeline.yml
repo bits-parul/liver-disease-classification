@@ -55,14 +55,6 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Copy files to EC2
-        env:
-          KEY: ${{ secrets.AWS_PRIVATE_KEY }}
-        run: |
-          echo "${{ secrets.AWS_PRIVATE_KEY }}" > key.pem
-          chmod 400 key.pem
-          scp -o StrictHostKeyChecking=no -i key.pem -r * ec2-user@13.51.166.88:/home/ec2-user/liver-app
-
       - name: SSH and Deploy
         env:
           KEY: ${{ secrets.AWS_PRIVATE_KEY }}
