@@ -55,21 +55,12 @@ jobs:
         with:
           python-version: 3.8
           
-      - name: Copy files to EC2
-        if: success()
-        env:
-          KEY: ${{ secrets.AWS_PRIVATE_KEY }}
-        run: |
-          echo "${{ secrets.AWS_PRIVATE_KEY }}" > key.pem
-          chmod 400 key.pem
-          scp -o StrictHostKeyChecking=no -i key.pem -r * ec2-user@16.170.248.183:/home/ec2-user/liver-app
-
       - name: SSH and Deploy
         if: success()
         env:
           KEY: ${{ secrets.AWS_PRIVATE_KEY }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@16.170.248.183 << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.AWS_PRIVATE_KEY }} ec2-user@16.170.248.183 << 'EOF'
           cd /home/ec2-user/liver-app
           pip install -r requirements.txt
           nohup python3 /home/ec2-user/liver-app/app/liver_app.py &
